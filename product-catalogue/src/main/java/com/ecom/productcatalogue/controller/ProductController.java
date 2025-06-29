@@ -2,16 +2,14 @@ package com.ecom.productcatalogue.controller;
 
 import com.ecom.productcatalogue.model.Product;
 import com.ecom.productcatalogue.service.ProductService;
-import jakarta.ws.rs.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-@Path("/products")
+@RestController
 public class ProductController {
+
     private ProductService productService;
 
     @Autowired
@@ -19,19 +17,18 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GET
+    @GetMapping("/products")
     public List<Product> getAllProducts(){
         return productService.getAllProducts();
     }
 
-    @POST
+    @PostMapping("/products")
     public Product addProduct(@RequestBody Product newProduct){
         return newProduct;
     }
 
-    @DELETE
-    @Path("/{id}")
-    public void deleteProduct(@PathParam("id") String id){
+    @DeleteMapping("/products/{id}")
+    public void deleteProduct(@PathVariable String id){
 
     }
 }
