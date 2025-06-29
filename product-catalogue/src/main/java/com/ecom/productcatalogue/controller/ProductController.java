@@ -10,7 +10,7 @@ import java.util.List;
 @RestController
 public class ProductController {
 
-    private ProductService productService;
+    final private ProductService productService;
 
     @Autowired
     public ProductController(ProductService productService) {
