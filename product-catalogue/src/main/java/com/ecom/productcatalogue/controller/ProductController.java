@@ -1,7 +1,6 @@
 package com.ecom.productcatalogue.controller;
 
 import com.ecom.productcatalogue.dto.ProductDto;
-import com.ecom.productcatalogue.model.Product;
 import com.ecom.productcatalogue.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +18,12 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public List<Product> getAllProducts(){
+    public List<ProductDto> getAllProducts(){
         return productService.getAllProducts();
     }
 
     @PostMapping("/products")
-    public Product addProduct(@RequestBody Product newProduct){
+    public ProductDto addProduct(@RequestBody ProductDto newProduct){
         return newProduct;
     }
 

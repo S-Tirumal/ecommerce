@@ -25,8 +25,15 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public List<ProductDto> getAllProducts() {
+        List<Product> list = productRepository.findAll();
+        return list.stream().map(product -> ProductDto.builder()
+                .id(product.getId())
+                .title(product.getName())
+                .description(product.getDescription())
+                .imageUrl(product.getImageUrl())
+                .amount(product.getPrice())
+                .build()).toList();
     }
 
     public ProductDto getProductById(Long id) {
