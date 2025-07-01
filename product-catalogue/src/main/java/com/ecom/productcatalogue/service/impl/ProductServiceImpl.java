@@ -27,13 +27,7 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public List<ProductDto> getAllProducts() {
         List<Product> list = productRepository.findAll();
-        return list.stream().map(product -> ProductDto.builder()
-                .id(product.getId())
-                .title(product.getName())
-                .description(product.getDescription())
-                .imageUrl(product.getImageUrl())
-                .amount(product.getPrice())
-                .build()).toList();
+        return list.stream().map(this::fromProduct).toList();
     }
 
     public ProductDto getProductById(Long id) {
@@ -47,7 +41,39 @@ public class ProductServiceImpl implements ProductService{
                 .build();
     }
 
+    @Override
+    public ProductDto addProduct(ProductDto newProduct) {
+        Product product = productRepository.save(toProduct(newProduct));
+        return fromProduct(product);
+    }
 
+    @Override
+    public ProductDto updateProduct(ProductDto productDto) {
+        Product product = productRepository.save(toProduct(productDto));
+        return fromProduct(product);
+    }
 
+    @Override
+    public void deleteProduct(Long id) {
+        productRepository.deleteById(id);
+    }
 
+    private ProductDto fromProduct(Product product) {
+        return ProductDto.builder()
+                .id(product.getId())
+                .title(product.getName())
+                .description(product.getDescription())
+                .imageUrl(product.getImageUrl())
+                .amount(product.getPrice())
+                .build();
+    }
+
+    private Product toProduct(ProductDto productDto) {
+        Product product = new Product();
+        product.setName(productDto.getTitle());
+        product.setPrice(productDto.getAmount());
+        product.setDescription(productDto.getDescription());
+        product.setImageUrl(productDto.getImageUrl());
+        return product;
+    }
 }

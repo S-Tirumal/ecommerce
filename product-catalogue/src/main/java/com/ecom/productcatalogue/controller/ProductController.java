@@ -24,12 +24,17 @@ public class ProductController {
 
     @PostMapping("/products")
     public ProductDto addProduct(@RequestBody ProductDto newProduct){
-        return newProduct;
+        return productService.addProduct(newProduct);
     }
 
     @DeleteMapping("/products/{id}")
     public void deleteProduct(@PathVariable String id){
+        productService.deleteProduct(Long.parseLong(id));
+    }
 
+    @PatchMapping("/products/{id}")
+    public ProductDto updateProduct(@RequestBody ProductDto productDto) {
+        return productService.updateProduct(productDto);
     }
 
     @GetMapping("/products/{id}")
