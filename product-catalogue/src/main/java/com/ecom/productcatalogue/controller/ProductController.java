@@ -1,5 +1,6 @@
 package com.ecom.productcatalogue.controller;
 
+import com.ecom.productcatalogue.dto.ProductDto;
 import com.ecom.productcatalogue.model.Product;
 import com.ecom.productcatalogue.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,10 @@ public class ProductController {
     @DeleteMapping("/products/{id}")
     public void deleteProduct(@PathVariable String id){
 
+    }
+
+    @GetMapping("/products/{id}")
+    public ProductDto getProductById(@PathVariable Long id) {
+        return productService.getProductById(id);
     }
 }
