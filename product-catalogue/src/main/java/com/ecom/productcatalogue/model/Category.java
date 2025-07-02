@@ -13,7 +13,9 @@ import java.util.List;
 @Setter
 public class Category  extends BaseModel{
 
-    private String name;
+    private String title;
+
+    private String description;
 
     @OneToMany
     @JsonBackReference
