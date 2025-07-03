@@ -123,7 +123,7 @@ public class ProductControllerMvcTest {
 
         when(productService.updateProduct(any(ProductDto.class))).thenReturn(updatedProduct);
 
-        mockMvc.perform(post("/api/products/1")
+        mockMvc.perform(patch("/api/products/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updatedProduct)))
                 .andExpect(status().isOk())

@@ -37,7 +37,7 @@ public class ProductController {
         productService.deleteProduct(Long.parseLong(id));
     }
 
-    @PostMapping("/products/{id}")
+    @PatchMapping("/products/{id}")
     public ProductDto updateProduct(@RequestBody ProductDto productDto) {
         return productService.updateProduct(productDto);
     }
