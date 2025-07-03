@@ -19,7 +19,7 @@ public class Category  extends BaseModel{
 
     private String description;
 
-    @OneToMany
+    @OneToMany(mappedBy = "category")
     @JsonBackReference
     private List<Product> productList;
 
