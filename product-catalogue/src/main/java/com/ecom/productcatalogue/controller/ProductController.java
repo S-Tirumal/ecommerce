@@ -2,12 +2,17 @@ package com.ecom.productcatalogue.controller;
 
 import com.ecom.productcatalogue.dto.ProductDto;
 import com.ecom.productcatalogue.service.ProductService;
+import jdk.jfr.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+
 @RestController
+@RequestMapping("/api")
 public class ProductController {
 
     final private ProductService productService;
@@ -32,7 +37,7 @@ public class ProductController {
         productService.deleteProduct(Long.parseLong(id));
     }
 
-    @PatchMapping("/products/{id}")
+    @PostMapping("/products/{id}")
     public ProductDto updateProduct(@RequestBody ProductDto productDto) {
         return productService.updateProduct(productDto);
     }
