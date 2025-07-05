@@ -1,4 +1,4 @@
-package dto;
+package com.ecom.userauthentication.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;

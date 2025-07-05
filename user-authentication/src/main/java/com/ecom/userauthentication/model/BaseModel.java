@@ -1,4 +1,4 @@
-package model;
+package com.ecom.userauthentication.model;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

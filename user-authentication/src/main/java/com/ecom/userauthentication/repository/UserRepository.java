@@ -1,6 +1,6 @@
-package repository;
+package com.ecom.userauthentication.repository;
 
-import model.User;
+import com.ecom.userauthentication.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

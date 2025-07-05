@@ -1,4 +1,4 @@
-package dto;
+package com.ecom.userauthentication.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
@@ -11,12 +11,12 @@ import java.io.Serializable;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class SignUpResponseDto implements Serializable {
+public class SignUpRequestDto implements Serializable {
     private String username;
+    private String password;
     private String email;
     private String role; // e.g., "USER", "ADMIN"
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    private String message; // e.g., "User registered successfully"
 }

@@ -1,12 +1,12 @@
-package service;
+package com.ecom.userauthentication.service;
 
-import dto.LoginResponseDto;
-import dto.SignUpRequestDto;
-import dto.SignUpResponseDto;
-import model.User;
+import com.ecom.userauthentication.dto.LoginResponseDto;
+import com.ecom.userauthentication.dto.SignUpRequestDto;
+import com.ecom.userauthentication.dto.SignUpResponseDto;
+import com.ecom.userauthentication.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repository.UserRepository;
+import com.ecom.userauthentication.repository.UserRepository;
 
 @Service
 public class AuthServiceImpl implements AuthService{
