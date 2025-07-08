@@ -1,6 +1,8 @@
 package com.ecom.userauthentication.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.UniqueConstraint;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +10,7 @@ import lombok.Setter;
 @Setter
 @Entity(name = "users")
 public class User extends BaseModel{
+    @Column(unique = true)
     private String username;
     private String password;
     private String email;
