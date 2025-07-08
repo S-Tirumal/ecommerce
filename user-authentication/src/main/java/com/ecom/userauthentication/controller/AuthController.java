@@ -1,9 +1,6 @@
 package com.ecom.userauthentication.controller;
 
-import com.ecom.userauthentication.dto.LoginRequestDto;
-import com.ecom.userauthentication.dto.LoginResponseDto;
-import com.ecom.userauthentication.dto.SignUpRequestDto;
-import com.ecom.userauthentication.dto.SignUpResponseDto;
+import com.ecom.userauthentication.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,5 +37,14 @@ public class AuthController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<>(loginResponseDto, HttpStatus.OK);
+    }
+
+    @PostMapping("/validateToken")
+    public Boolean validateToken(@RequestBody ValidateTokenDto validateTokenDto) {
+        try {
+            return authService.isTokenValid(validateTokenDto.getToken());
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
