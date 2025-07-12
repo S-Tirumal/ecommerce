@@ -28,7 +28,7 @@ public class UserRepository {
                 .build();
 
         ResponseEntity<Boolean> validTokenResponseEntity =
-                requestForEntity("https://localhost:9000/auth/validateToken", HttpMethod.POST, dto, Boolean.class,null);
+                requestForEntity("http://localhost:9000/api/validateToken", HttpMethod.POST, dto, Boolean.class, null);
 
         Boolean isTokenValid = validTokenResponseEntity.getBody();
         if(validTokenResponseEntity.getStatusCode().equals(HttpStatusCode.valueOf(200)) &&
@@ -43,6 +43,7 @@ public class UserRepository {
         RestTemplate restTemplate = restTemplateBuilder.build();
         RequestCallback requestCallback = restTemplate.httpEntityCallback(request, responseType);
         ResponseExtractor<ResponseEntity<T>> responseExtractor = restTemplate.responseEntityExtractor(responseType);
-        return restTemplate.execute(url, httpMethod, requestCallback, responseExtractor, uriVariables);
+        Object[] safeUriVariables = (uriVariables == null) ? new Object[]{} : uriVariables;
+        return restTemplate.execute(url, httpMethod, requestCallback, responseExtractor, safeUriVariables);
     }
 }

@@ -11,7 +11,7 @@ services:
       MYSQL_USER: ecommerce                      # Optional
       MYSQL_PASSWORD: ecompassword              # Optional
     ports:
-      - "3308:3308"
+      - "3308:3306"
     volumes:
       - mysql-data:/var/lib/mysql
 
