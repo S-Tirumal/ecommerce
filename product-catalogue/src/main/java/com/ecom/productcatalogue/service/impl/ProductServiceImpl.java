@@ -1,11 +1,13 @@
 package com.ecom.productcatalogue.service.impl;
 
+import com.ecom.productcatalogue.config.TokenHolder;
 import com.ecom.productcatalogue.dto.ProductDto;
 import com.ecom.productcatalogue.model.Product;
 import com.ecom.productcatalogue.repository.FakeStoreProductRepository;
 import com.ecom.productcatalogue.repository.ProductRepository;
 import com.ecom.productcatalogue.repository.dto.FakeStoreProductDto;
 import com.ecom.productcatalogue.service.ProductService;
+import com.ecom.productcatalogue.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,14 +20,23 @@ public class ProductServiceImpl implements ProductService{
 
     private final FakeStoreProductRepository fakeStoreProductRepository;
 
+    private final UserService userService;
+
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository, FakeStoreProductRepository fakeStoreProductRepository){
+    public ProductServiceImpl(ProductRepository productRepository, FakeStoreProductRepository fakeStoreProductRepository, UserService userService){
         this.productRepository = productRepository;
         this.fakeStoreProductRepository = fakeStoreProductRepository;
+        this.userService = userService;
     }
 
     @Override
     public List<ProductDto> getAllProducts() {
+        TokenHolder.getToken();
+        boolean isValid = userService.validateToken(TokenHolder.getToken());
+        if(!isValid){
+            throw new RuntimeException("Invalid token");
+        }
+
         List<Product> list = productRepository.findAll();
         return list.stream().map(this::fromProduct).toList();
     }
