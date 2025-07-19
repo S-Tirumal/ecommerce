@@ -22,4 +22,6 @@ public class ProductDto {
 
     private Boolean isPrimeSpecific;
 
+    private String categoryId;
+
 }
