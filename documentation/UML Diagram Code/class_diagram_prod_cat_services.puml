@@ -1,0 +1,97 @@
+@startuml
+
+
+class           ProductController {
+    - ProductService productService;
+    + List<ProductDto> getAllProducts()
+    + ProductDto addProduct(ProductDto newProduct)
+    + void deleteProduct(String id)
+    + ProductDto updateProduct(ProductDto productDto)
+}
+
+interface       ProductService{
+    + List<ProductDto> getAllProducts();
+    + ProductDto getProductById(Long id);
+    + ProductDto addProduct(ProductDto newProduct);
+    + ProductDto updateProduct(ProductDto productDto);
+    + void deleteProduct(Long id);
+}
+
+class           ProductServiceImpl{
+    - ProductRepository productRepository;
+    - UserService userService;
+    + ProductServiceImpl(ProductRepository productRepository, UserService userService)
+    + List<ProductDto> getAllProducts();
+    + ProductDto getProductById(Long id);
+    + ProductDto addProduct(ProductDto newProduct);
+    + ProductDto updateProduct(ProductDto productDto);
+    + void deleteProduct(Long id);
+    - Product toProduct(ProductDto productDto)
+}
+
+interface   JpaRepository<T, D> {
+    + List<T> findAll()
+    + T save(T t)
+}
+
+interface           ProductRepository{
+    + void deleteById(Long aLong)
+}
+
+interface UserService{
+    + validateToken(String token);
+}
+
+class UserServiceImpl{
+    + boolean validateToken(String token)
+}
+
+ProductController *-- ProductService : has
+ProductService <|-- ProductServiceImpl : is a
+ProductServiceImpl *-- ProductRepository : has a
+ProductServiceImpl *-- UserService : has a
+UserService <|-- UserServiceImpl : is a
+
+class       CategoryController{
+    - CategoryService categoryService;
+
+    + CategoryController(CategoryService categoryService)
+    + List<CategoryDto> getAllCategories()
+    + CategoryDto addCategory(CategoryDto newCategory)
+    + void deleteCategory(String id)
+    + CategoryDto updateCategory(CategoryDto CategoryDto)
+    + CategoryDto getCategoryById(Long id)
+}
+
+interface   CategoryService {
+    + List<CategoryDto> getAllCategories()
+    + CategoryDto getCategoryById(Long id)
+    + CategoryDto addCategory(CategoryDto newCategory)
+    + CategoryDto updateCategory(CategoryDto categoryDto)
+    + void deleteCategory(Long id)
+}
+
+class       CategoryServiceImpl{
+    - CategoryRepository categoryRepository
+    - UserService userService
+    + CategoryServiceImpl(CategoryRepository categoryRepository)
+    + List<CategoryDto> getAllCategories()
+    + CategoryDto getCategoryById(Long id)
+    + CategoryDto addCategory(CategoryDto newCategory)
+    + CategoryDto updateCategory(CategoryDto categoryDto)
+    + void deleteCategory(Long id)
+    - CategoryDto fromCategory(Category category)
+    - Category toCategory(CategoryDto categoryDto)
+}
+
+class       CategoryRepository{
+    + void deleteById(Long aLong)
+}
+
+CategoryController *-- CategoryService
+CategoryService <|-- CategoryServiceImpl
+CategoryServiceImpl *-- CategoryRepository
+CategoryServiceImpl *-- UserService
+JpaRepository <|-up- CategoryRepository
+JpaRepository <|-up- ProductRepository : is a
+@enduml
